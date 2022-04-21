@@ -1,5 +1,5 @@
 {
-  "name": "realworld-dynamodb-lambda",
+  "name": "madblogapi",
   "version": "1.0.0",
   "description": "A serverless backend implementation for RealWorld using AWS DynamoDB + Lambda",
   "keywords": [

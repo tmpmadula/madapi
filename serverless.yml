@@ -1,9 +1,9 @@
-service: realworld
+service: madBlogApi
 
 provider:
   name: aws
-  runtime: nodejs8.10
-  region: us-east-1
+  runtime: nodejs12.x
+  region: 	af-south-1
   environment:
     DYNAMODB_NAMESPACE: ${opt:stage, "dev"}
   iamRoleStatements:
@@ -220,7 +220,7 @@ resources:
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
-        TableName: realworld-${self:provider.environment.DYNAMODB_NAMESPACE}-users
+        TableName: ${self:provider.environment.DYNAMODB_NAMESPACE}-users
         GlobalSecondaryIndexes:
           -
             IndexName: email
@@ -255,7 +255,7 @@ resources:
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
-        TableName: realworld-${self:provider.environment.DYNAMODB_NAMESPACE}-articles
+        TableName: ${self:provider.environment.DYNAMODB_NAMESPACE}-articles
         GlobalSecondaryIndexes:
           -
             IndexName: updatedAt
@@ -290,7 +290,7 @@ resources:
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
-        TableName: realworld-${self:provider.environment.DYNAMODB_NAMESPACE}-comments
+        TableName: ${self:provider.environment.DYNAMODB_NAMESPACE}-comments
         GlobalSecondaryIndexes:
           -
             IndexName: article
