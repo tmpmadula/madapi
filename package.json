@@ -14,7 +14,7 @@
     "lint": "eslint src/ test/",
     "test": "npm run lint && ./test-api-local.sh",
     "start": "start-server.sh",
-    "stop": "./stop-server.sh",
+    "stop": "stop-server.sh",
     "deploy": "serverless deploy",
     "test:deployed": "API_URL=`serverless info --verbose | grep '^ServiceEndpoint:' | grep -o 'https://.*'`; API_URL=$API_URL/api mocha",
     "build:docs": "jsdoc -d gh-pages/jsdoc src/ .jsdoc.summary.md",
