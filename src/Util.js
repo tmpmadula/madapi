@@ -1,6 +1,6 @@
 /* istanbul ignore next */
 if (!process.env.AWS_REGION) {
-  process.env.AWS_REGION = 'af-south-1';
+  process.env.AWS_REGION = 'us-east-1';
 }
 
 /* istanbul ignore next */
@@ -64,7 +64,7 @@ function envelop(res, statusCode = 200) {
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Credentials': true
     },
-    body: JSON.stringify(body.message),
+    body,
   };
 }
 
