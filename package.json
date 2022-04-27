@@ -21,7 +21,7 @@
     "lodash": "^4.17.21",
     "node.extend": "^1.1.7",
     "prettier": "^1.18.2",
-    "serverless": "^1.46.1",
+    "serverless": "^1.83.3",
     "serverless-add-api-key": "^4.2.0",
     "serverless-dynamodb-local": "^0.2.38",
     "serverless-offline": "^5.6.0",
