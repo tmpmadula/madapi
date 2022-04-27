@@ -1,50 +1,54 @@
 {
-  "name": "madblogapi",
+  "name": "madapi",
   "version": "1.0.0",
-  "description": "A serverless backend implementation for RealWorld using AWS DynamoDB + Lambda",
-  "keywords": [
-    "realworld",
-    "aws",
-    "lambda",
-    "dynamodb",
-    "serverless"
-  ],
-  "license": "MIT",
+  "repository": "",
+  "author": "",
+  "license": "Apache-2.0",
   "scripts": {
-    "lint": "eslint src/ test/",
-    "test": "npm run lint && ./test-api-local.sh",
-    "start": "start-server.sh",
-    "stop": "stop-server.sh",
-    "deploy": "serverless deploy",
-    "test:deployed": "API_URL=`serverless info --verbose | grep '^ServiceEndpoint:' | grep -o 'https://.*'`; API_URL=$API_URL/api mocha",
-    "build:docs": "jsdoc -d gh-pages/jsdoc src/ .jsdoc.summary.md",
-    "postinstall": "serverless dynamodb install 2>&1 | awk NF"
+    "start": "sls offline start --useSeparateProcesses",
+    "prettier": "prettier --write \"**/*.{ts,tsx}\""
   },
   "devDependencies": {
-    "aws-sdk": "^2.1119.0",
-    "axios": "^0.26.1",
-    "eslint": "^6.6.0",
-    "mocha": "^6.2.2",
-    "node-jre": "^0.2.3",
-    "nyc": "^14.1.1",
-    "serverless": "^1.57.0",
-    "serverless-dynamodb-local": "0.2.35",
-    "serverless-offline": "^4.10.6",
-    "showdown": "^1.9.1"
+    "@types/aws-lambda": "^8.10.33",
+    "@types/graphql": "^14.2.2",
+    "@types/jest": "^24.0.15",
+    "@types/node": "^12.0.12",
+    "@types/nodemailer": "^6.4.1",
+    "@types/uuid": "^3.4.5",
+    "apollo-server-testing": "^2.6.7",
+    "dotenv": "^8.0.0",
+    "jest": "^24.8.0",
+    "lodash": "^4.17.21",
+    "node.extend": "^1.1.7",
+    "prettier": "^1.18.2",
+    "serverless": "^1.46.1",
+    "serverless-add-api-key": "^4.2.0",
+    "serverless-dynamodb-local": "^0.2.38",
+    "serverless-offline": "^5.6.0",
+    "serverless-webpack": "^5.3.1",
+    "source-map-support": "^0.5.12",
+    "ts-jest": "^26.4.4",
+    "ts-loader": "^6.0.4",
+    "typescript": "^4.0.0",
+    "webpack": "^4.35.2",
+    "webpack-cli": "^3.3.5",
+    "webpack-node-externals": "^1.7.2"
   },
   "dependencies": {
-    "bcryptjs": "^2.4.3",
-    "jsonwebtoken": "^8.5.1",
-    "slugify": "^1.3.6",
-    "uuid": "^3.3.3"
-  },
-  "optionalDependencies": {
-    "coveralls": "^3.0.7",
-    "jsdoc": "^3.6.3"
-  },
-  "greenkeeper": {
-    "ignore": [
-      "aws-sdk"
-    ]
+    "@aws-sdk/client-ses": "^3.10.0",
+    "apollo-server-express": "^2.21.2",
+    "apollo-server-lambda": "^2.21.2",
+    "aws-lambda-graphql": "^1.0.0-alpha.19",
+    "aws-sdk": "^2.1122.0",
+    "class-validator": "^0.11.0",
+    "fuse.js": "^6.4.3",
+    "graphql": "^15.3.0",
+    "graphql-playground": "^1.3.17",
+    "graphql-playground-middleware-lambda": "^1.7.13",
+    "ioredis": "^4.19.2",
+    "nodemailer": "^6.7.3",
+    "reflect-metadata": "^0.1.13",
+    "serverless-plugin-offline-dynamodb-stream": "^1.0.20",
+    "type-graphql": "^1.1.1"
   }
 }

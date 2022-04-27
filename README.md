@@ -1,102 +1,101 @@
-# ![RealWorld Example App](https://rawgit.com/anishkny/realworld-dynamodb-lambda/master/lambda-node-logo.png)
+# typescript-serverless-graphql
+Starting point for building a `Lambda + GraphQL + DynamoDB + Typescript + Webpack + TypeGraphQL` based application
 
-[![RealWorld Backend](https://img.shields.io/badge/realworld-backend-%23783578.svg)](http://realworld.io)
-[![Build Status](https://travis-ci.org/anishkny/realworld-dynamodb-lambda.svg?branch=master)](https://travis-ci.org/anishkny/realworld-dynamodb-lambda)
-[![Coverage Status](https://coveralls.io/repos/github/anishkny/realworld-dynamodb-lambda/badge.svg?branch=master)](https://coveralls.io/github/anishkny/realworld-dynamodb-lambda?branch=master)
-[![Greenkeeper badge](https://badges.greenkeeper.io/anishkny/realworld-dynamodb-lambda.svg)](https://greenkeeper.io/)
-[![Known Vulnerabilities](https://snyk.io/test/github/anishkny/realworld-dynamodb-lambda/badge.svg)](https://snyk.io/test/github/anishkny/realworld-dynamodb-lambda)
-[![Gitter](https://img.shields.io/gitter/room/realworld-dev/node-lambda-dynamodb.svg)](https://gitter.im/realworld-dev/node-lambda-dynamodb)
-
-> ### AWS DynamoDB + Lambda codebase containing real world examples (CRUD, auth, advanced patterns, etc) that adheres to the [RealWorld](https://github.com/gothinkster/realworld-example-apps) spec and API.
-
-
-### [Demo](https://anishkny.github.io/realworld-dynamodb-lambda/test-output/network.html)
-
-This codebase was created to demonstrate a fully fledged fullstack application built with **AWS DynamoDB + Lambda** including CRUD operations, authentication, routing, pagination, and more.
-
-We've gone to great lengths to adhere to the **AWS DynamoDB + Lambda** community styleguides & best practices.
-
-For more information on how to this works with other frontends/backends, head over to the [RealWorld](https://github.com/gothinkster/realworld) repo.
-
-# Getting started
-
-*Requires Node 8 or higher*
-
-Clone this repo, and cd into it:
-```
-git clone https://github.com/anishkny/realworld-dynamodb-lambda
-cd realworld-dynamodb-lambda
+```bash
+yarn install
+sls dynamodb install
+yarn start
 ```
 
-## Starting the local server
+# CRUD Operations sample
+All HTTP Post requests..
 
+## Create Products
 ```
-npm install
-npm run start
-```
-
-This should start local DynamoDB emulator and Serverless offline. You can now make API calls against `http://localhost:3000/api` like this:
-
-```
-curl http://localhost:3000/api/articles
-
-Serverless: GET /api/articles (λ: listArticles)
-Serverless: The first request might take a few extra seconds
-Serverless: [200] {"statusCode":200,"headers":{"Access-Control-Allow-Origin":"*","Access-Control-Allow-Credentials":true},"body":"{\"articles\":[]}"}
+mutation {
+  addProduct(data: {
+      name: "Teste",
+      quantity: 10
+  }) {
+      name
+  }
+}
 ```
 
-## Running tests locally
+## List Products
 ```
-npm test
-```
-See sample test run [log](https://travis-ci.org/anishkny/realworld-dynamodb-lambda) and [network traffic](https://anishkny.github.io/realworld-dynamodb-lambda/test-output/network.html).
-
-# How it works
-
-## Overview
-This repo uses [Serverless Framework](https://serverless.com) to describe, test and deploy the [RealWorld REST API](https://github.com/gothinkster/realworld/blob/master/api/README.md#endpoints) to [AWS Lambda](https://aws.amazon.com/lambda/). AWS Lambda provides "serverless" cloud functions as a service. [AWS API Gateway](https://aws.amazon.com/api-gateway/) is used to expose the deployed Lambda functions as a HTTP REST API.
-
-![Architecture Diagram](architecture.svg)
-
-## API
-The API is described in the [`serverless.yml`](serverless.yml) file. For example the following snippet instructs AWS Lambda to execute the `create` method in [`src/User.js`](src/User.js) whenever a `POST` method is called on `/api/users`:
-```
-functions:
-
-  ## Users API
-  createUser:
-    handler: src/User.create
-    events:
-      - http:
-          method: POST
-          path: /api/users
-          cors: true
-
-  ...
+{
+  products {
+    id
+    name
+  }
+}
 ```
 
-## Storage
-For storage, [AWS DynamoDB](https://aws.amazon.com/dynamodb/) a managed serverless NoSQL database is used. Tables are created to store `users`, `articles` and `comments` also described in `serverless.yml` file. For example:
+## Show Product
 ```
-resources:
-  Resources:
-
-    UsersDynamoDBTable:
-      Type: 'AWS::DynamoDB::Table'
-      DeletionPolicy: Retain
-      Properties:
-        AttributeDefinitions:
-        ...
+{
+  product(id: "602a12c0-942d-11e9-951c-bb18edc8c9c2") {
+    id
+    name
+  }
+}
 ```
 
-## Deployment
-To deploy the code to AWS, simply execute:
+## Update Product
 ```
-npm run deploy
+mutation {
+  updateProduct(
+    id: "602a12c0-942d-11e9-951c-bb18edc8c9c2",
+    data: {
+      name: "deugood",
+      quantity: 10
+  }) {
+      name
+  }
+}
 ```
-This will use `serverless` to deploy the API as described in `serverless.yml`.
 
-Once deployed, you can test the deployed API by executing:
+## Delete Product
 ```
-npm run test:deployed
+mutation {
+  removeProduct(id: "602a12c0-942d-11e9-951c-bb18edc8c9c2")
+}
+```
+
+# Tests
+
+First start dynamodb locally if it's not running
+`sls dynamodb start`
+
+Then
+`yarn test`
+
+```
+yarn run v1.16.0
+$ jest
+ PASS  src/config/__tests__/database.test.ts
+ PASS  src/__tests__/requests/handler.test.ts (7.849s)
+----------------------|----------|----------|----------|----------|-------------------|
+File                  |  % Stmts | % Branch |  % Funcs |  % Lines | Uncovered Line #s |
+----------------------|----------|----------|----------|----------|-------------------|
+All files             |      100 |      100 |      100 |      100 |                   |
+ src                  |      100 |      100 |      100 |      100 |                   |
+  handler.ts          |      100 |      100 |      100 |      100 |                   |
+ src/config           |      100 |      100 |      100 |      100 |                   |
+  database.ts         |      100 |      100 |      100 |      100 |                   |
+ src/models           |      100 |      100 |      100 |      100 |                   |
+  product.ts          |      100 |      100 |      100 |      100 |                   |
+ src/resolvers        |      100 |      100 |      100 |      100 |                   |
+  product-resolver.ts |      100 |      100 |      100 |      100 |                   |
+ src/resolvers/types  |      100 |      100 |      100 |      100 |                   |
+  product-input.ts    |      100 |      100 |      100 |      100 |                   |
+----------------------|----------|----------|----------|----------|-------------------|
+
+Test Suites: 2 passed, 2 total
+Tests:       7 passed, 7 total
+Snapshots:   0 total
+Time:        9.933s
+Ran all test suites.
+Done in 12.34s.
 ```
