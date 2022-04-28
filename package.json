@@ -1,8 +1,8 @@
 {
-  "name": "mad-api-blog",
+  "name": "madblogapi",
   "version": "0.0.1",
-  "description": "",
-  "author": "madula",
+  "description": "A starter project that makes creating a deployable AWS Serverless project extremely easy",
+  "author": "hardyscc",
   "license": "MIT",
   "scripts": {
     "prebuild": "rimraf dist",
@@ -16,6 +16,10 @@
     "deploy": "sls deploy --verbose",
     "package": "sls package",
     "lint": "eslint \"{src,test}/**/*.ts\" --max-warnings 0",
+    "test:watch": "jest --verbose --watch",
+    "test:cov": "jest --verbose --coverage",
+    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
+    "test:e2e": "jest --config ./test/jest-e2e.json",
     "ddb:install": "sls dynamodb install",
     "ddb:start": "sls dynamodb start",
     "sls:start": "cross-env NO_COLOR= cross-env IS_NOT_SLS= sls offline start",
@@ -71,7 +75,7 @@
     "js-yaml": "4.1.0",
     "lint-staged": "12.3.4",
     "prettier": "2.5.1",
-    "serverless": "^3.0.3",
+    "serverless": "2.72.3",
     "serverless-dynamodb-local": "0.2.40",
     "serverless-offline": "8.5.0",
     "serverless-plugin-typescript": "2.1.1",
@@ -89,7 +93,14 @@
       "json",
       "ts"
     ],
-    "rootDir": "src"
+    "rootDir": "src",
+    "testRegex": ".spec.ts$",
+    "transform": {
+      "^.+\\.(t|j)s$": "ts-jest"
+    },
+    "coverageDirectory": "../coverage",
+    "testEnvironment": "node",
+    "testTimeout": 45000
   },
   "lint-staged": {
     "*.ts": [
