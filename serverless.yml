@@ -1,90 +1,58 @@
-service: madapi
-
-plugins:
-  - serverless-webpack
-  - serverless-dynamodb-local
-  - serverless-offline
-  - serverless-plugin-offline-dynamodb-stream
-  #- serverless-add-api-key
+service: mad-blog-api
 
 provider:
   name: aws
   runtime: nodejs14.x
-  stage: dev
-  region: af-south-1
+  stage: ${opt:stage, 'dev'}
+  region: ${opt:region, 'af-south-1'}
+  environment:
+    SERVICE: ${self:service}
+    STAGE: ${self:provider.stage}
+    REGION: ${self:provider.region}
+    NO_COLOR: ${env:NO_COLOR, 'true'}
+  apiGateway:
+    shouldStartNameWithService: true
   iamRoleStatements:
     - Effect: Allow
       Action:
-        - dynamodb:ListTables
         - dynamodb:DescribeTable
-        - dynamodb:DescribeStream
-        - dynamodb:ListStreams
-        - dynamodb:GetShardIterator
-        - dynamodb:BatchGetItem
+        - dynamodb:Query
+        - dynamodb:Scan
         - dynamodb:GetItem
         - dynamodb:PutItem
         - dynamodb:UpdateItem
         - dynamodb:DeleteItem
-        - dynamodb:Query
-        - dynamodb:Scan
-        - dynamodb:DescribeReservedCapacity
-        - dynamodb:DescribeReservedCapacityOfferings
-        - dynamodb:GetRecords
-      Resource: 'arn:aws:dynamodb:af-south-1:*:table/*'
-    - Effect: Allow
-      Action:
-        - execute-api:ManageConnections
-      Resource: 'arn:aws:execute-api:*:*:*/development/POST/@connections/*'
-   
+      Resource: arn:aws:dynamodb:${self:provider.region}:*:*
 
-functions:
-  queryAll:
-    handler: src/handler.handleHttp
-    events:
-      - http:
-          path: /
-          method: any
-          cors: true
-    environment:
-      USER_TABLE: ${self:custom.bloguser}
-      ARTICLE_TABLE: ${self:custom.articles}
-      COMMENTS_TABLE: ${self:custom.blogcomments}
-      MESSAGE_TABLE: ${self:custom.blogmessage}
-      NOTIFICATION_TABLE: ${self:custom.blognotification}
- 
-  graphQLPlayground:
-    handler: src/handler.playgroundHandler
-    events:
-      - http:
-          method: get
-          path: '/playground'
-          cors: true
+plugins:
+  - serverless-plugin-typescript
+  - serverless-dynamodb-local
+  - serverless-offline
 
-resources:
-  - ${file(resources/api-gateway-errors.yml)}
-  - ${file(resources/dynamodb.yml)}
-  - ${file(resources/s3-bucket.yml)}
+# remove the unnecessary packages to keep small upload size
+package:
+  exclude:
+    - node_modules/typescript/**
+    - node_modules/@types/**
 
 custom:
-  #apiGateway:
-   # apiKeySourceType: HEADER
-  #apiKeys:
-   # dev:
-    #  - name: LockMadoola
-   # prod:
-   #   - name: name1
   dynamodb:
-    start:
-      migrate: true
     stages:
-      - dev
-      - test
-      - prod
-  stage: ${opt:stage, self:provider.stage}
-  # Set the table name here so we can use it while testing locally
-  bloguser: ${self:custom.stage}-bloguser
-  blogcomments: ${self:custom.stage}-blogcomments
-  articles: ${self:custom.stage}-articles
-  messageTable: ${self:custom.stage}-blogmessage
-  notificationTable: ${self:custom.stage}-blognotification
+      - ${self:provider.stage}
+    start:
+      port: 8000
+      inMemory: true
+      migrate: true
+      seed: false
 
+functions:
+  index-function:
+    handler: src/index.handler
+    events:
+      - http:
+          cors: true
+          path: '{proxy+}'
+          method: any
+
+resources:
+  - ${file(resource/dynamodb.yml)}
