@@ -1,4 +1,4 @@
-service: mad-blog-api
+service: madblogapi
 
 provider:
   name: aws

@@ -1,9 +1,9 @@
 import { ConfigModule } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
 import { DynamooseModule } from 'nestjs-dynamoose';
-import { NotificationSchema } from '../schema/notification.schema';
+import { ArticleSchema } from '../schema/article.schema';
 
-export const NotificationTestImports = [
+export const articleTestImports = [
   ConfigModule.forRoot(),
   GraphQLModule.forRoot({
     autoSchemaFile: true,
@@ -19,8 +19,8 @@ export const NotificationTestImports = [
   }),
   DynamooseModule.forFeature([
     {
-      name: 'notification',
-      schema: NotificationSchema,
+      name: 'article',
+      schema: ArticleSchema,
     },
   ]),
 ];
