@@ -39,7 +39,7 @@ Resources:
     Type: AWS::DynamoDB::Table
     DeletionPolicy: Delete
     Properties:
-      TableName: ${self:provider.stage}-articles-blog
+      TableName: ${self:provider.stage}-article-blog
       BillingMode: PAY_PER_REQUEST
       AttributeDefinitions:
         - AttributeName: id

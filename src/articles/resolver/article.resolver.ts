@@ -2,11 +2,11 @@ import { Args, ID, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { CreatearticleInput } from '../model/create-article.input';
 import { article } from '../model/article.model';
 import { UpdatearticleInput } from '../model/update-article.input';
-import { articleService } from '../service/article.service';
+import { ArticleService } from '../service/article.service';
 
 @Resolver(() => article)
-export class articleResolver {
-  constructor(private readonly articleService: articleService) {}
+export class ArticleResolver {
+  constructor(private readonly articleService: ArticleService) {}
 
   @Mutation(/* istanbul ignore next */ () => article)
   createarticle(@Args('input') input: CreatearticleInput) {

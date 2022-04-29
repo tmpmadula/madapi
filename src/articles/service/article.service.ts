@@ -7,7 +7,7 @@ import { article, articleKey } from '../model/article.model';
 import { UpdatearticleInput } from '../model/update-article.input';
 
 @Injectable()
-export class articleService {
+export class ArticleService {
   constructor(
     @InjectModel('article')
     private readonly model: Model<article, articleKey>,

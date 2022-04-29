@@ -10,11 +10,11 @@ import {
 } from '@nestjs/common';
 import { CreatearticleInput } from '../model/create-article.input';
 import { UpdatearticleInput } from '../model/update-article.input';
-import { articleService } from '../service/article.service';
+import { ArticleService } from '../service/article.service';
 
 @Controller('article')
-export class articleController {
-  constructor(private readonly articleService: articleService) {}
+export class ArticleController {
+  constructor(private readonly articleService: ArticleService) {}
 
   @Post()
   create(@Body() body: CreatearticleInput) {

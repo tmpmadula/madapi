@@ -1,18 +1,18 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { articleStatus } from '../model/article.enum';
-import { articleService } from '../service/article.service';
+import { ArticleService } from '../service/article.service';
 import { articleTestImports } from '../test/article-test.imports';
 import articleJson from './article.data.json';
-import { articleResolver } from './article.resolver';
-let resolver: articleResolver;
+import { ArticleResolver } from './article.resolver';
+let resolver: ArticleResolver;
 
 beforeAll(async () => {
   const module: TestingModule = await Test.createTestingModule({
     imports: articleTestImports,
-    providers: [articleService, articleResolver],
+    providers: [ArticleService, ArticleResolver],
   }).compile();
 
-  resolver = module.get<articleResolver>(articleResolver);
+  resolver = module.get<ArticleResolver>(ArticleResolver);
 });
 
 describe('article Resolver', () => {
