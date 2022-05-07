@@ -10,7 +10,7 @@ Resources:
           AttributeType: S
         - AttributeName: targetId
           AttributeType: S
-        - AttributeName: userId
+        - AttributeName: authorId
           AttributeType: S
         - AttributeName: status
           AttributeType: S
@@ -28,7 +28,7 @@ Resources:
             ProjectionType: ALL
         - IndexName: userIdGlobalIndex
           KeySchema:
-            - AttributeName: userId
+            - AttributeName: authorId
               KeyType: HASH
             - AttributeName: status
               KeyType: RANGE
@@ -46,7 +46,7 @@ Resources:
           AttributeType: S
         - AttributeName: targetId
           AttributeType: S
-        - AttributeName: userId
+        - AttributeName: authorId
           AttributeType: S
         - AttributeName: status
           AttributeType: S
@@ -62,9 +62,9 @@ Resources:
               KeyType: RANGE
           Projection:
             ProjectionType: ALL
-        - IndexName: userIdGlobalIndex
+        - IndexName: authorIdGlobalIndex
           KeySchema:
-            - AttributeName: userId
+            - AttributeName: authorId
               KeyType: HASH
             - AttributeName: status
               KeyType: RANGE

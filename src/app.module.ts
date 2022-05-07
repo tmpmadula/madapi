@@ -4,12 +4,14 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { DynamooseModule } from 'nestjs-dynamoose';
 import { NotificationModule } from './notification/notification.module';
 import { ArticleModule } from './articles/article.module';
+import { join } from 'path';
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
     GraphQLModule.forRoot({
-      autoSchemaFile: true,
+      // autoSchemaFile: true,
+      autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
       playground: {
         endpoint:
           process.env.IS_NOT_SLS === 'true'

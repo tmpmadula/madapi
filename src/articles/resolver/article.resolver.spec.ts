@@ -1,14 +1,14 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { articleStatus } from '../model/article.enum';
+import { ArticleStatus } from '../model/article.enum';
 import { ArticleService } from '../service/article.service';
-import { articleTestImports } from '../test/article-test.imports';
+import { ArticleTestImports } from '../test/article-test.imports';
 import articleJson from './article.data.json';
 import { ArticleResolver } from './article.resolver';
 let resolver: ArticleResolver;
 
 beforeAll(async () => {
   const module: TestingModule = await Test.createTestingModule({
-    imports: articleTestImports,
+    imports: ArticleTestImports,
     providers: [ArticleService, ArticleResolver],
   }).compile();
 
@@ -25,7 +25,7 @@ describe('article Resolver', () => {
         const result = await resolver.createarticle(input);
         expect(result).toMatchObject({
           ...input,
-          status: articleStatus.Active,
+          status: ArticleStatus.Active,
         });
         expect(result.id).toBeDefined();
       }),
@@ -42,13 +42,13 @@ describe('article Resolver', () => {
   it('update status', async () => {
     const articles = await resolver.articleByTargetId('device11');
     expect(articles).toHaveLength(1);
-    expect(articles[0].status).toBe(articleStatus.Active);
+    expect(articles[0].status).toBe(ArticleStatus.Active);
 
     const updated = await resolver.updatearticle(articles[0].id, {
-      status: articleStatus.Deleted,
+      status: ArticleStatus.Deleted,
     });
     expect(updated).toBeDefined();
-    expect(updated.status).toBe(articleStatus.Deleted);
+    expect(updated.status).toBe(ArticleStatus.Deleted);
   });
 
   it('find by id', async () => {

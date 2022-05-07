@@ -1,18 +1,14 @@
 import { Field, ID, ObjectType } from '@nestjs/graphql';
-import { CreatearticleInput } from './create-article.input';
-import { articleStatus } from './article.enum';
+import { CreateArticleInput } from './create-article.input';
 
-export type articleKey = {
+export type ArticleKey = {
   id: string;
 };
 
-@ObjectType({ implements: CreatearticleInput })
-export class article extends CreatearticleInput {
+@ObjectType({ implements: CreateArticleInput })
+export class Article extends CreateArticleInput {
   @Field(/* istanbul ignore next */ () => ID)
   id: string;
-
-  @Field(/* istanbul ignore next */ () => articleStatus)
-  status: articleStatus;
 
   @Field()
   createAt: string;

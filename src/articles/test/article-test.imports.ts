@@ -3,7 +3,7 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { DynamooseModule } from 'nestjs-dynamoose';
 import { ArticleSchema } from '../schema/article.schema';
 
-export const articleTestImports = [
+export const ArticleTestImports = [
   ConfigModule.forRoot(),
   GraphQLModule.forRoot({
     autoSchemaFile: true,

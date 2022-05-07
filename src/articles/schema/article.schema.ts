@@ -3,29 +3,44 @@ import { Schema } from 'dynamoose';
 export const ArticleSchema = new Schema({
   id: {
     type: String,
-    hashKey: true,
   },
-  targetId: {
-    type: String,
-    index: {
-      global: true,
-      rangeKey: 'status',
-    },
-  },
-  userId: {
-    type: String,
-    index: {
-      global: true,
-      rangeKey: 'status',
-    },
-  },
-  content: {
+  articleId: {
     type: String,
   },
-  status: {
+  slug: {
     type: String,
+  },
+  title: {
+    type: String,
+  },
+  description: {
+    type: String,
+  },
+  body: {
+    type: String,
+  },
+  tags: {
+    type: String,
+  },
+  author: {
+    type: String,
+  },
+  favoritedUsers: {
+    type: [String],
+  },
+  favoritesCount: {
+    type: String,
+  },
+  favorited: {
+    type: String,
+  },
+  Comment: {
+    type: [String],
   },
   createAt: {
+    type: String,
+  },
+  updatedAt: {
     type: String,
   },
 });

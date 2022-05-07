@@ -1,32 +1,31 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel, Model } from 'nestjs-dynamoose';
 import * as uuid from 'uuid';
-import { CreatearticleInput } from '../model/create-article.input';
-import { articleStatus } from '../model/article.enum';
-import { article, articleKey } from '../model/article.model';
-import { UpdatearticleInput } from '../model/update-article.input';
+import { CreateArticleInput } from '../model/create-article.input';
+import { ArticleStatus } from '../model/article.enum';
+import { Article, ArticleKey } from '../model/article.model';
+import { UpdateArticleInput } from '../model/update-article.input';
 
 @Injectable()
 export class ArticleService {
   constructor(
     @InjectModel('article')
-    private readonly model: Model<article, articleKey>,
+    private readonly model: Model<Article, ArticleKey>,
   ) {}
 
-  create(input: CreatearticleInput) {
+  create(input: CreateArticleInput) {
     return this.model.create({
       ...input,
       id: uuid.v4(),
-      status: articleStatus.Active,
       createAt: new Date().toISOString(),
     });
   }
 
-  update(key: articleKey, input: UpdatearticleInput) {
+  update(key: ArticleKey, input: UpdateArticleInput) {
     return this.model.update(key, input);
   }
 
-  findOne(key: articleKey) {
+  findOne(key: ArticleKey) {
     return this.model.get(key);
   }
 
@@ -35,16 +34,18 @@ export class ArticleService {
       .query('targetId')
       .eq(targetId)
       .where('status')
-      .eq(articleStatus.Active)
+      .eq(ArticleStatus.Active)
       .exec();
   }
 
-  findByUserId(userId: string) {
-    return this.model
-      .query('userId')
-      .eq(userId)
-      .where('status')
-      .eq(articleStatus.Active)
-      .exec();
+  findByAuthorId(authorId: string) {
+    return (
+      this.model
+        .query('authorId')
+        .eq(authorId)
+        // .where('status')
+        //.eq(ArticleStatus.Active)
+        .exec()
+    );
   }
 }

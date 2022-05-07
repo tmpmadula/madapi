@@ -2,20 +2,27 @@ import { Field, InputType, InterfaceType } from '@nestjs/graphql';
 import { IsNotEmpty, IsString } from 'class-validator';
 
 @InputType()
-@InterfaceType('Basearticle')
-export class CreatearticleInput {
+@InterfaceType('BaseArticle')
+export class CreateArticleInput {
   @IsNotEmpty()
   @IsString()
   @Field()
-  targetId: string;
+  articleId: string;
 
   @IsNotEmpty()
   @IsString()
   @Field()
-  userId: string;
+  authorId: string;
 
-  @IsNotEmpty()
-  @IsString()
   @Field()
-  content: string;
+  slug: string;
+
+  @Field()
+  title: string;
+
+  @Field()
+  description: string;
+
+  @Field()
+  body: string;
 }

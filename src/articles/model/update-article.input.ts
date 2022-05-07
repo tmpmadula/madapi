@@ -1,11 +1,22 @@
 import { Field, InputType } from '@nestjs/graphql';
-import { IsEnum, IsIn } from 'class-validator';
-import { articleStatus } from './article.enum';
 
 @InputType()
-export class UpdatearticleInput {
-  @IsIn([articleStatus.Deleted])
-  @IsEnum(articleStatus)
-  @Field(/* istanbul ignore next */ () => articleStatus)
-  status: articleStatus;
+export class UpdateArticleInput {
+  @Field()
+  slug: string;
+
+  @Field()
+  title: string;
+
+  @Field()
+  description: string;
+
+  @Field()
+  body: string;
+
+  @Field()
+  tags: string;
+
+  @Field()
+  id: string;
 }
