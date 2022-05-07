@@ -10,7 +10,7 @@ Resources:
           AttributeType: S
         - AttributeName: targetId
           AttributeType: S
-        - AttributeName: authorId
+        - AttributeName: userId
           AttributeType: S
         - AttributeName: status
           AttributeType: S
@@ -28,7 +28,7 @@ Resources:
             ProjectionType: ALL
         - IndexName: userIdGlobalIndex
           KeySchema:
-            - AttributeName: authorId
+            - AttributeName: userId
               KeyType: HASH
             - AttributeName: status
               KeyType: RANGE
