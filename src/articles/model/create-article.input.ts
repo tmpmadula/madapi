@@ -12,7 +12,7 @@ export class CreateArticleInput {
   @IsNotEmpty()
   @IsString()
   @Field()
-  authorId: string;
+  userId: string;
 
   @Field()
   slug: string;

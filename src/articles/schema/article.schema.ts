@@ -3,11 +3,15 @@ import { Schema } from 'dynamoose';
 export const ArticleSchema = new Schema({
   id: {
     type: String,
+    hashKey: true,
   },
   articleId: {
     type: String,
   },
   slug: {
+    type: String,
+  },
+  status: {
     type: String,
   },
   title: {
@@ -22,8 +26,12 @@ export const ArticleSchema = new Schema({
   tags: {
     type: String,
   },
-  author: {
+  userId: {
     type: String,
+    index: {
+      global: true,
+      rangeKey: 'status',
+    },
   },
   favoritedUsers: {
     type: [String],

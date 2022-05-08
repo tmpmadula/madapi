@@ -1,17 +1,17 @@
 [
   {
     "targetId": "device11",
-    "authorId": "user11",
+    "userId": "user11",
     "content": "Hello"
   },
   {
     "targetId": "device12",
-    "authorId": "user11",
+    "userId": "user11",
     "content": "Hello"
   },
   {
     "targetId": "device13",
-    "authorId": "user12",
+    "userId": "user12",
     "content": "Hello"
   }
 ]

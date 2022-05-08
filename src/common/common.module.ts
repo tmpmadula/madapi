@@ -1,8 +1,6 @@
-import { Module } from "@nestjs/common";
-import { PUB_SUB } from "./constants";
-import { PubSub } from "graphql-subscriptions";
-import { FileUploadService } from "./services/file-upload.service";
-import { ImagesController } from "./images.controller";
+import { Module } from '@nestjs/common';
+import { PUB_SUB } from './constants';
+import { PubSub } from 'graphql-subscriptions';
 
 const pubSubProvider = {
   provide: PUB_SUB,
@@ -10,8 +8,8 @@ const pubSubProvider = {
 };
 
 @Module({
-  providers: [pubSubProvider, FileUploadService],
-  controllers: [ImagesController],
-  exports: [pubSubProvider, FileUploadService],
+  providers: [pubSubProvider],
+
+  exports: [pubSubProvider],
 })
 export class CommonModule {}

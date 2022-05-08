@@ -1,8 +1,8 @@
 {
   "name": "madblogapi",
   "version": "0.0.1",
-  "description": "A starter project that makes creating a deployable AWS Serverless project extremely easy",
-  "author": "hardyscc",
+  "description": "",
+  "author": "madula",
   "license": "MIT",
   "scripts": {
     "prebuild": "rimraf dist",
@@ -45,6 +45,7 @@
     "reflect-metadata": "0.1.13",
     "rimraf": "3.0.2",
     "rxjs": "7.5.4",
+    "slugify": "^1.6.5",
     "type-graphql": "1.1.1",
     "uuid": "8.3.2"
   },

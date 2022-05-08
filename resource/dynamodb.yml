@@ -35,7 +35,7 @@ Resources:
           Projection:
             ProjectionType: ALL
 
-  ArticlesTable:
+  ArticleTable:
     Type: AWS::DynamoDB::Table
     DeletionPolicy: Delete
     Properties:
@@ -44,27 +44,27 @@ Resources:
       AttributeDefinitions:
         - AttributeName: id
           AttributeType: S
-        - AttributeName: targetId
-          AttributeType: S
-        - AttributeName: authorId
+        - AttributeName: userId
           AttributeType: S
         - AttributeName: status
+          AttributeType: S
+        - AttributeName: slug
           AttributeType: S
       KeySchema:
         - AttributeName: id
           KeyType: HASH
       GlobalSecondaryIndexes:
-        - IndexName: targetIdGlobalIndex
+        - IndexName: userIdGlobalIndex
           KeySchema:
-            - AttributeName: targetId
+            - AttributeName: userId
               KeyType: HASH
             - AttributeName: status
               KeyType: RANGE
           Projection:
             ProjectionType: ALL
-        - IndexName: authorIdGlobalIndex
+        - IndexName: slugGlobalIndex
           KeySchema:
-            - AttributeName: authorId
+            - AttributeName: slug
               KeyType: HASH
             - AttributeName: status
               KeyType: RANGE

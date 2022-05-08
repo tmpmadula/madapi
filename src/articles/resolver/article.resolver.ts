@@ -29,12 +29,7 @@ export class ArticleResolver {
   }
 
   @Query(/* istanbul ignore next */ () => [Article])
-  articleByAuthorId(@Args('authorId') authorId: string) {
-    return this.articleService.findByAuthorId(authorId);
-  }
-
-  @Query(/* istanbul ignore next */ () => [Article])
-  articleByTargetId(@Args('targetId') targetId: string) {
-    return this.articleService.findByTargetId(targetId);
+  articleByUserId(@Args('userId') userId: string) {
+    return this.articleService.findByUserId(userId);
   }
 }

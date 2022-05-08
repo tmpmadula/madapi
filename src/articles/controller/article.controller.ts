@@ -32,15 +32,11 @@ export class ArticleController {
   }
 
   @Get()
-  find(
-    @Query() { authorId, targetId }: { authorId?: string; targetId?: string },
-  ) {
-    if (authorId && !targetId) {
-      return this.articleService.findByAuthorId(authorId);
+  find(@Query() { userId }: { userId?: string }) {
+    if (userId) {
+      return this.articleService.findByUserId(userId);
     }
-    if (targetId && !authorId) {
-      return this.articleService.findByTargetId(targetId);
-    }
+
     throw new BadRequestException();
   }
 }

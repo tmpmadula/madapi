@@ -13,12 +13,15 @@ export class ArticleService {
     private readonly model: Model<Article, ArticleKey>,
   ) {}
 
-  create(input: CreateArticleInput) {
-    return this.model.create({
+  async create(input: CreateArticleInput) {
+    const newArticle = this.model.create({
       ...input,
       id: uuid.v4(),
+      status: ArticleStatus.Active,
       createAt: new Date().toISOString(),
     });
+
+    return newArticle;
   }
 
   update(key: ArticleKey, input: UpdateArticleInput) {
@@ -38,14 +41,12 @@ export class ArticleService {
       .exec();
   }
 
-  findByAuthorId(authorId: string) {
-    return (
-      this.model
-        .query('authorId')
-        .eq(authorId)
-        // .where('status')
-        //.eq(ArticleStatus.Active)
-        .exec()
-    );
+  findByUserId(userId: string) {
+    return this.model
+      .query('userId')
+      .eq(userId)
+      .where('status')
+      .eq(ArticleStatus.Active)
+      .exec();
   }
 }

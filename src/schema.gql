@@ -24,22 +24,28 @@ enum NotificationStatus {
 
 type Article implements BaseArticle {
   articleId: String!
-  authorId: String!
+  userId: String!
   slug: String!
   title: String!
   description: String!
   body: String!
   id: ID!
+  status: articleStatus!
   createAt: String!
 }
 
 interface BaseArticle {
   articleId: String!
-  authorId: String!
+  userId: String!
   slug: String!
   title: String!
   description: String!
   body: String!
+}
+
+enum articleStatus {
+  Active
+  Deleted
 }
 
 type Query {
@@ -47,8 +53,7 @@ type Query {
   notificationByUserId(userId: String!): [Notification!]!
   notificationByTargetId(targetId: String!): [Notification!]!
   getArticle(id: ID!): Article!
-  articleByAuthorId(authorId: String!): [Article!]!
-  articleByTargetId(targetId: String!): [Article!]!
+  articleByUserId(userId: String!): [Article!]!
 }
 
 type Mutation {
@@ -70,7 +75,7 @@ input UpdateNotificationInput {
 
 input CreateArticleInput {
   articleId: String!
-  authorId: String!
+  userId: String!
   slug: String!
   title: String!
   description: String!
