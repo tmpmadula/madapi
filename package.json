@@ -112,6 +112,9 @@
       "@commitlint/config-conventional"
     ]
   },
+  "resolutions": {
+    "graphql": "15.8.0"
+  },
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged",

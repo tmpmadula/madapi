@@ -13,8 +13,8 @@ export const NotificationTestImports = [
     aws: { region: 'local' },
     model: {
       create: false,
-      prefix: `${process.env.SERVICE}-${process.env.STAGE}-`,
-      suffix: '-table',
+      prefix: `${process.env.STAGE}-`,
+      suffix: '-bog',
     },
   }),
   DynamooseModule.forFeature([
