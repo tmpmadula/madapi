@@ -16,7 +16,6 @@
     "deploy": "sls deploy --verbose",
     "package": "sls package",
     "lint": "eslint \"{src,test}/**/*.ts\" --max-warnings 0",
-    "test": "jest --verbose",
     "test:watch": "jest --verbose --watch",
     "test:cov": "jest --verbose --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
