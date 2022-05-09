@@ -1,3 +1,0 @@
-export const ARTICLE_ADDED_EVENT = "ARTICLE_ADDED";
-
-export const COMMENT_ADDED_EVENT = "COMMENT_ADDED";

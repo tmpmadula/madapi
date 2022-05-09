@@ -39,7 +39,6 @@ lerna-debug.log*
 /.build
 /.serverless
 .tsbuildinfo
-.env.local
 
 # DynamoDB
 /.dynamodb

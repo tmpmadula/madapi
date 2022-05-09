@@ -3,7 +3,7 @@ Resources:
     Type: AWS::DynamoDB::Table
     DeletionPolicy: Delete
     Properties:
-      TableName: ${self:provider.stage}-notification-blog
+      TableName: ${self:service}-${self:provider.stage}-notification-table
       BillingMode: PAY_PER_REQUEST
       AttributeDefinitions:
         - AttributeName: id
@@ -29,42 +29,6 @@ Resources:
         - IndexName: userIdGlobalIndex
           KeySchema:
             - AttributeName: userId
-              KeyType: HASH
-            - AttributeName: status
-              KeyType: RANGE
-          Projection:
-            ProjectionType: ALL
-
-  ArticleTable:
-    Type: AWS::DynamoDB::Table
-    DeletionPolicy: Delete
-    Properties:
-      TableName: ${self:provider.stage}-article-blog
-      BillingMode: PAY_PER_REQUEST
-      AttributeDefinitions:
-        - AttributeName: id
-          AttributeType: S
-        - AttributeName: userId
-          AttributeType: S
-        - AttributeName: status
-          AttributeType: S
-        - AttributeName: slug
-          AttributeType: S
-      KeySchema:
-        - AttributeName: id
-          KeyType: HASH
-      GlobalSecondaryIndexes:
-        - IndexName: userIdGlobalIndex
-          KeySchema:
-            - AttributeName: userId
-              KeyType: HASH
-            - AttributeName: status
-              KeyType: RANGE
-          Projection:
-            ProjectionType: ALL
-        - IndexName: slugGlobalIndex
-          KeySchema:
-            - AttributeName: slug
               KeyType: HASH
             - AttributeName: status
               KeyType: RANGE

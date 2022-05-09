@@ -1,7 +1,7 @@
 {
   "name": "madblogapi",
   "version": "0.0.1",
-  "description": "",
+  "description": "A starter project that makes creating a deployable AWS Serverless project extremely easy",
   "author": "madula",
   "license": "MIT",
   "scripts": {
@@ -16,6 +16,7 @@
     "deploy": "sls deploy --verbose",
     "package": "sls package",
     "lint": "eslint \"{src,test}/**/*.ts\" --max-warnings 0",
+    "test": "jest --verbose",
     "test:watch": "jest --verbose --watch",
     "test:cov": "jest --verbose --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
@@ -40,12 +41,10 @@
     "class-validator": "0.13.2",
     "dynamoose": "2.8.5",
     "graphql": "15.8.0",
-    "graphql-subscriptions": "^2.0.0",
     "nestjs-dynamoose": "0.3.4",
     "reflect-metadata": "0.1.13",
     "rimraf": "3.0.2",
     "rxjs": "7.5.4",
-    "slugify": "^1.6.5",
     "type-graphql": "1.1.1",
     "uuid": "8.3.2"
   },
