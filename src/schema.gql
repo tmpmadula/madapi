@@ -22,45 +22,15 @@ enum NotificationStatus {
   Deleted
 }
 
-type Article implements BaseArticle {
-  articleId: String!
-  userId: String!
-  slug: String!
-  title: String!
-  description: String!
-  body: String!
-  id: ID!
-  status: articleStatus!
-  createAt: String!
-}
-
-interface BaseArticle {
-  articleId: String!
-  userId: String!
-  slug: String!
-  title: String!
-  description: String!
-  body: String!
-}
-
-enum articleStatus {
-  Active
-  Deleted
-}
-
 type Query {
   notification(id: ID!): Notification!
   notificationByUserId(userId: String!): [Notification!]!
   notificationByTargetId(targetId: String!): [Notification!]!
-  getArticle(id: ID!): Article!
-  articleByUserId(userId: String!): [Article!]!
 }
 
 type Mutation {
   createNotification(input: CreateNotificationInput!): Notification!
   updateNotification(input: UpdateNotificationInput!, id: ID!): Notification!
-  createarticle(input: CreateArticleInput!): Article!
-  updatearticle(input: UpdateArticleInput!, id: ID!): Article!
 }
 
 input CreateNotificationInput {
@@ -71,22 +41,4 @@ input CreateNotificationInput {
 
 input UpdateNotificationInput {
   status: NotificationStatus!
-}
-
-input CreateArticleInput {
-  articleId: String!
-  userId: String!
-  slug: String!
-  title: String!
-  description: String!
-  body: String!
-}
-
-input UpdateArticleInput {
-  slug: String!
-  title: String!
-  description: String!
-  body: String!
-  tags: String!
-  id: String!
 }
