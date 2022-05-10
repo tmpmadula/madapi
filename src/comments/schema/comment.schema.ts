@@ -3,6 +3,10 @@ import { Schema } from 'dynamoose';
 export const CommentSchema = new Schema({
   id: {
     type: String,
+    hashKey: true,
+  },
+  articleId: {
+    type: String,
   },
   body: {
     type: String,

@@ -5,7 +5,6 @@ import { CreateArticleInput } from '../model/create-article.input';
 import { ArticleStatus } from '../model/article.enum';
 import { Article, ArticleKey } from '../model/article.model';
 import { UpdateArticleInput } from '../model/update-article.input';
-
 @Injectable()
 export class ArticleService {
   constructor(
@@ -13,7 +12,7 @@ export class ArticleService {
     private readonly model: Model<Article, ArticleKey>,
   ) {}
 
-  async create(input: CreateArticleInput) {
+  create(input: CreateArticleInput) {
     const newArticle = this.model.create({
       ...input,
       id: uuid.v4(),

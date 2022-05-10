@@ -4,6 +4,7 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { DynamooseModule } from 'nestjs-dynamoose';
 import { NotificationModule } from './notification/notification.module';
 import { ArticleModule } from './articles/article.module';
+import { CommentsModule } from './comments/comment.module';
 //import { join } from 'path';
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { ArticleModule } from './articles/article.module';
     }),
     NotificationModule,
     ArticleModule,
+    CommentsModule,
   ],
 })
 export class AppModule {}

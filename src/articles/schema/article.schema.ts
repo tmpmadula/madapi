@@ -42,9 +42,7 @@ export const ArticleSchema = new Schema({
   favorited: {
     type: String,
   },
-  Comment: {
-    type: [String],
-  },
+
   createAt: {
     type: String,
   },
